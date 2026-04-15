@@ -1,0 +1,57 @@
+{
+  "name": "endlesstesting",
+  "version": "0.1.0",
+  "description": "CLI for Endless Testing — AI-powered A/B testing platform",
+  "keywords": [
+    "ab-testing",
+    "cro",
+    "conversion",
+    "cli",
+    "mcp",
+    "thompson-sampling",
+    "experiments"
+  ],
+  "homepage": "https://endlesstesting.ai",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valentinyeo/endlesstesting-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/valentinyeo/endlesstesting-cli/issues"
+  },
+  "license": "MIT",
+  "author": "Valentin Yeo",
+  "type": "module",
+  "bin": {
+    "endlesstesting": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc && chmod +x dist/index.js",
+    "dev": "tsc --watch",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@inquirer/prompts": "^7.5.0",
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "chalk": "^5.4.1",
+    "commander": "^13.1.0",
+    "ora": "^8.2.0",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.2",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}
