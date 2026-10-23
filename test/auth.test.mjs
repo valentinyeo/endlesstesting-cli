@@ -46,8 +46,11 @@ function runCli(home, args, input = "") {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [cli, ...args], {
       env: { ...process.env, HOME: home },
-      stdio: ["pipe", "ignore", "ignore"],
+      stdio: ["pipe", "pipe", "pipe"],
     });
+    let output = "";
+    child.stdout.on("data", (d) => { output += d; });
+    child.stderr.on("data", (d) => { output += d; });
     let timedOut = false;
     let inputError;
     const timer = setTimeout(() => {
@@ -65,7 +68,7 @@ function runCli(home, args, input = "") {
       clearTimeout(timer);
       if (timedOut) reject(new Error("CLI timed out after 15 seconds"));
       else if (inputError) reject(inputError);
-      else resolve(code);
+      else resolve({ code, output });
     });
     child.stdin.end(input);
   });
@@ -73,17 +76,17 @@ function runCli(home, args, input = "") {
 
 test("auth refuses a key given as an argument", async (t) => {
   const { key, home, headers, configFile } = await setup(t);
-  const code = await runCli(home, ["auth", key]);
-  assert.notEqual(code, 0);
+  const { code, output } = await runCli(home, ["auth", key]);
+  assert.notEqual(code, 0, output);
   const config = JSON.parse(await readFile(configFile, "utf8"));
-  assert.equal(Object.hasOwn(config, "apiKey"), false);
-  assert.equal(headers.includes(`Bearer ${key}`), false);
+  assert.equal(Object.hasOwn(config, "apiKey"), false, output);
+  assert.equal(headers.includes(`Bearer ${key}`), false, output);
 });
 
 test("auth reads the key from stdin", async (t) => {
   const { key, home, headers, configFile } = await setup(t);
-  const code = await runCli(home, ["auth"], `${key}\n`);
-  assert.equal(code, 0);
+  const { code, output } = await runCli(home, ["auth"], `${key}\n`);
+  assert.equal(code, 0, output);
   const config = JSON.parse(await readFile(configFile, "utf8"));
   assert.equal(config.apiKey, key);
   assert.equal(headers.includes(`Bearer ${key}`), true);
