@@ -20,7 +20,7 @@ program
     "after",
     `
 Getting started:
-  $ endlesstesting auth <api-key>        Authenticate with your API key
+  $ endlesstesting auth                  Enter API key securely and verify it
   $ endlesstesting init                  Register your domain and get the SDK snippet
   $ endlesstesting run <url>             Start a test run (5 AI-generated tests)
   $ endlesstesting results               View variant performance

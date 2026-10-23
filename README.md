@@ -10,9 +10,11 @@ npm install -g endlesstesting
 
 ## Quick start
 
+Run `endlesstesting auth` and type your key at the masked `API key:` prompt.
+
 ```bash
 # 1. Authenticate with your API key (get one at app.endlesstesting.ai)
-endlesstesting auth et_live_abc123
+endlesstesting auth
 
 # 2. Register your domain and get the SDK snippet
 endlesstesting init
@@ -31,7 +33,7 @@ endlesstesting results
 
 | Command | Description |
 |---------|-------------|
-| `auth <key>` | Authenticate with your API key |
+| `auth` | Authenticate with your API key |
 | `auth --status` | Check authentication status |
 | `auth --logout` | Remove stored API key |
 | `init` | Register a domain and get the SDK snippet |

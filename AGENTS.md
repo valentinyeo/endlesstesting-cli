@@ -31,14 +31,15 @@ npx endlesstesting@latest --help
 
 ### 2. Authenticate
 
-The user must provide an API key from https://app.endlesstesting.ai/settings.
+The user authenticates locally at the masked prompt with an API key from https://app.endlesstesting.ai/settings.
 The key starts with `et_live_…` (prod) or `et_test_…` (sandbox).
 
 ```bash
-npx endlesstesting auth <api-key>
+npx endlesstesting auth
 ```
 
-If no key is available, STOP and ask the user for one. Do not guess, do not mock.
+Agents must never put the key in command arguments or ask for it in chat.
+If not authenticated, STOP and ask the user to run `npx endlesstesting auth` themselves.
 
 ### 3. Register the domain and get the SDK snippet
 
