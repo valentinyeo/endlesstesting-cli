@@ -24,7 +24,7 @@ This will:
   .action(async () => {
     const apiKey = getApiKey();
     if (!apiKey) {
-      console.log(chalk.red("Not authenticated. Run: endlesstesting auth <api-key>"));
+      console.log(chalk.red("Not authenticated. Run: endlesstesting auth"));
       process.exit(1);
     }
 

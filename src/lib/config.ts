@@ -42,6 +42,7 @@ export function updateConfig(partial: Partial<Config>): Config {
   _cachedConfig = null;
   const config = { ...readConfig(), ...partial };
   writeConfig(config);
+  _cachedConfig = config;
   return config;
 }
 

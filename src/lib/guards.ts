@@ -7,7 +7,7 @@ import { readConfig } from "./config.js";
 export function requireAuth(): string {
   const apiKey = getApiKey();
   if (!apiKey) {
-    console.log(chalk.red("Not authenticated. Run: endlesstesting auth <api-key>"));
+    console.log(chalk.red("Not authenticated. Run: endlesstesting auth"));
     process.exit(1);
   }
   return apiKey;
